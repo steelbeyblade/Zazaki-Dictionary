@@ -3,8 +3,8 @@ from difflib import get_close_matches
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from PIL import ImageTk, Image
-import os
+# from PIL import ImageTk, Image    fotoğraf ekleme kütüphanesi
+# import os
 
 focusBorderImageData = '''
     R0lGODlhQABAAPcAAHx+fMTCxKSipOTi5JSSlNTS1LSytPTy9IyKjMzKzKyq
@@ -91,7 +91,7 @@ app.title("Zazaca - Türkçe Sözlük")
 style = ttk.Style()
 borderImage = PhotoImage("borderImage", data=borderImageData)
 focusBorderImage = PhotoImage("focusBorderImage", data=focusBorderImageData)
-# img = ImageTk.PhotoImage(Image.open("arma.png"))
+# img = ImageTk.PhotoImage(Image.open("arma.png"))              Fotoğraf koyma kodu
 # panel = Label(app, image = img)
 # panel.pack(side = "bottom", fill = "both", expand = "yes")
 
@@ -133,7 +133,9 @@ def clk():
     output.delete(0.0, END)
     try:
         search = data[word]
-        output.insert(0.0, search)
+        for i in search:
+            continue
+        output.insert(0.0, i)
         output.insert(0.0, (word.capitalize() + "\n", data.keys())[0])
     except:
         CloseMatches()
@@ -150,7 +152,9 @@ def CloseMatches():
         if MsgBox == 'yes':
             try:
                 search = data[close_match]
-                output.insert(0.0, search)
+                for i in search:
+                    continue
+                output.insert(0.0, i)
                 output.insert(0.0, (close_match.capitalize() + "\n", data.keys())[0])
             except:
                 return
@@ -161,6 +165,10 @@ def CloseMatches():
 
 
 def handle_click(event):
+    clk()
+    e.delete(0, 'end')
+
+def button():
     clk()
     e.delete(0, 'end')
 
@@ -182,7 +190,7 @@ output.bind("<FocusOut>", lambda event: frame2.state(["!focus"]))
 lab = Label(app, text='Kelime ara :', font=('none 12 bold'), bg="white")
 lab.place(relx=0.28, rely=0.10, anchor='s')
 
-but = Button(app, width=6, borderwidth=1, text='Ara', command=clk, bg='powder blue', font=('none 12 bold'))
+but = Button(app, width=6, borderwidth=1, text='Ara', command=button, bg='powder blue', font=('none 12 bold'))
 but.place(relx=0.5, rely=0.25, anchor='s')
 
 app.configure(background="white")
